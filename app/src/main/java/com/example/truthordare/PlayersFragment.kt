@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.truthordare.adapter.PlayersAdapter
 import com.example.truthordare.databinding.FragmentPlayersBinding
 import com.example.truthordare.model.PlayerData
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class PlayersFragment : Fragment() {
@@ -56,30 +58,32 @@ class PlayersFragment : Fragment() {
         return root
     }
 
-    private fun addInfo(){
+    private fun addInfo() {
         val inflater = LayoutInflater.from(requireContext())
-        val v = inflater.inflate(R.layout.alert_dialog, null)
+        val v = inflater.inflate(R.layout.alert_dialog, null) // Используем тот же layout
+
         val playerName = v.findViewById<EditText>(R.id.player_name_edT_alertDialog)
         val addBtn = v.findViewById<TextView>(R.id.add_new_player_btn_alerDialog)
-        val addDialog = AlertDialog.Builder(requireContext())
 
-        addDialog.setPositiveButton("OK"){
-            dialog,_->
+        // Создаем BottomSheetDialog
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(v)
+
+        addBtn.setOnClickListener {
             val names = playerName.text.toString()
-            playerList.add(PlayerData(names))
-            playersAdapter.notifyDataSetChanged()
-            dialog.dismiss()
+            if (names.isNotBlank()) {
+                playerList.add(PlayerData(names))
+                playersAdapter.notifyDataSetChanged()
+                bottomSheetDialog.dismiss() // Закрываем диалог
+            } else {
+                // Обработайте ситуацию, когда имя пустое
+                Toast.makeText(requireContext(), "Введите имя игрока", Toast.LENGTH_SHORT).show()
+            }
         }
 
-        addBtn.setOnClickListener {dialog->
-
-        }
-
-
-        addDialog.setView(v)
-        addDialog.create()
-        addDialog.show()
+        bottomSheetDialog.show() // Показываем BottomSheetDialog
     }
+
 
 //    override fun onPlayerAdded(playerName: String) {
 //        Log.e("PlayersFragment", "Player added: $playerName")
