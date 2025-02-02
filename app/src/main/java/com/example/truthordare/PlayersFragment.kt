@@ -24,6 +24,14 @@ class PlayersFragment : Fragment() {
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_playersFragment_to_versionsFragment)
         }
+
+        binding.addPlayerBtn.setOnClickListener{
+            AddPlayerFragment().let {
+                it.show(parentFragmentManager, it.tag)
+            }
+
+        }
+
         return root
     }
 

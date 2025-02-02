@@ -22,5 +22,17 @@
         <action
             android:id="@+id/action_playersFragment_to_versionsFragment"
             app:destination="@id/versionsFragment" />
+        <action
+            android:id="@+id/action_playersFragment_to_addPlayerFragment"
+            app:destination="@id/addPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPlayerFragment"
+        android:name="com.example.truthordare.AddPlayerFragment"
+        android:label="fragment_add_player"
+        tools:layout="@layout/fragment_add_player" >
+        <action
+            android:id="@+id/action_addPlayerFragment_to_playersFragment"
+            app:destination="@id/playersFragment" />
     </fragment>
 </navigation>

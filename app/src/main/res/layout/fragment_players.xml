@@ -41,20 +41,23 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
+            android:id="@+id/rv_players"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:listitem="@layout/players_item_list"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_player_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/green_button"
-            app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="@+id/textView4" >
+            app:layout_constraintBottom_toTopOf="@+id/add_new_player_btn"
+            app:layout_constraintEnd_toEndOf="@+id/add_new_player_btn" >
 
             <ImageView
                 android:layout_width="35dp"
@@ -73,7 +76,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/add_new_player_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
