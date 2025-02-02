@@ -18,7 +18,7 @@ import com.example.truthordare.databinding.FragmentPlayersBinding
 import com.example.truthordare.model.PlayerData
 
 
-class PlayersFragment : Fragment() {
+class PlayersFragment : Fragment(), AddPlayerFragment.PlayerListener {
 
     private var _binding: FragmentPlayersBinding? = null
     private val binding get() = _binding!!
@@ -36,61 +36,35 @@ class PlayersFragment : Fragment() {
             findNavController().navigate(R.id.action_playersFragment_to_versionsFragment)
         }
 
-//        binding.addPlayerBtn.setOnClickListener {
-//            val addPlayerFragment = AddPlayerFragment()
-//            addPlayerFragment.setPlayerListener(this) // Установите слушателя
-//            addPlayerFragment.show(parentFragmentManager, addPlayerFragment.tag)
-//        }
-
-
-
-
         playerList = ArrayList()
+
+        playerList.add(PlayerData("Игрок 1"))
+        playerList.add(PlayerData("Игрок 2"))
+        playerList.add(PlayerData("Игрок 3"))
 
         playersAdapter = PlayersAdapter(requireContext(), playerList)
         binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext()) // Укажите LayoutManager
         binding.rvPlayers.adapter = playersAdapter
 
-        binding.addPlayerBtn.setOnClickListener { addInfo() }
+        binding.addPlayerBtn.setOnClickListener {
+            // Создаем новый фрагмент для добавления игроков
+            val addPlayerFragment = AddPlayerFragment()
+            addPlayerFragment.setPlayerListener(this) // Установите слушателя
+            addPlayerFragment.show(parentFragmentManager, addPlayerFragment.tag)
+        }
 
         return root
     }
 
-    private fun addInfo(){
-        val inflater = LayoutInflater.from(requireContext())
-        val v = inflater.inflate(R.layout.alert_dialog, null)
-        val playerName = v.findViewById<EditText>(R.id.player_name_edT_alertDialog)
-        val addBtn = v.findViewById<TextView>(R.id.add_new_player_btn_alerDialog)
-        val addDialog = AlertDialog.Builder(requireContext())
-
-        addDialog.setPositiveButton("OK"){
-            dialog,_->
-            val names = playerName.text.toString()
-            playerList.add(PlayerData(names))
-            playersAdapter.notifyDataSetChanged()
-            dialog.dismiss()
-        }
-
-        addBtn.setOnClickListener {dialog->
-
-        }
-
-
-        addDialog.setView(v)
-        addDialog.create()
-        addDialog.show()
+    override fun onPlayerAdded(playerName: String) {
+        Log.d("PlayersFragment", "Player added: $playerName")
+        playerList.add(PlayerData(playerName))
+        playersAdapter.notifyItemInserted(playerList.size - 1)
+        playersAdapter.notifyDataSetChanged() // это можно оставить, если вы сделали изменения
     }
-
-//    override fun onPlayerAdded(playerName: String) {
-//        Log.e("PlayersFragment", "Player added: $playerName")
-//        playerList.add(PlayerData(playerName))
-//        playersAdapter.notifyItemInserted(playerList.size - 1)
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
