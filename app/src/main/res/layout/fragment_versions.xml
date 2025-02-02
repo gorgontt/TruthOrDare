@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VersionsFragment"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    android:id="@+id/frame_versions">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите"
+        android:textSize="32dp"
+        android:fontFamily="@font/jura"
+        android:textColor="@color/white"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="версию игры"
+        android:textSize="32dp"
+        android:fontFamily="@font/jura"
+        android:textColor="@color/white"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:id="@+id/couple_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пара"
+        android:textSize="50dp"
+        android:fontFamily="@font/jura"
+        android:background="@drawable/green_stroke_drop_shadow"
+        android:padding="30dp"
+        android:textColor="@color/green"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:clickable="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="40dp"/>
+
+    <TextView
+        android:id="@+id/company_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Компания"
+        android:textSize="50dp"
+        android:clickable="true"
+        android:fontFamily="@font/jura"
+        android:background="@drawable/violet_stroke_drop_shadow"
+        android:padding="30dp"
+        android:textColor="@color/green"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="40dp"/>
+
+
+
+
+</LinearLayout>
