@@ -1,6 +1,8 @@
 package com.example.truthordare
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,12 +25,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Найдите NavHostFragment и настройте NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Если у вас есть дополнительная навигация, лучше не использовать это здесь,
-        // так как NavHostFragment уже управляет начальным состоянием.
+
     }
 
 

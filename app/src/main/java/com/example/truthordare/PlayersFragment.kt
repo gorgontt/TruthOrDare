@@ -1,8 +1,8 @@
 package com.example.truthordare
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.service.autofill.UserData
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +10,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.truthordare.adapter.PlayersAdapter
 import com.example.truthordare.databinding.FragmentPlayersBinding
 import com.example.truthordare.model.PlayerData
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class PlayersFragment : Fragment() {
@@ -26,6 +26,7 @@ class PlayersFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var playerList: ArrayList<PlayerData>
     private lateinit var playersAdapter: PlayersAdapter
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,19 +39,12 @@ class PlayersFragment : Fragment() {
             findNavController().navigate(R.id.action_playersFragment_to_versionsFragment)
         }
 
-//        binding.addPlayerBtn.setOnClickListener {
-//            val addPlayerFragment = AddPlayerFragment()
-//            addPlayerFragment.setPlayerListener(this) // Установите слушателя
-//            addPlayerFragment.show(parentFragmentManager, addPlayerFragment.tag)
-//        }
+        sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
 
-
-
-
-        playerList = ArrayList()
+        playerList = loadPlayers() // Загружаем игроков из SharedPreferences
 
         playersAdapter = PlayersAdapter(requireContext(), playerList)
-        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext()) // Укажите LayoutManager
+        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPlayers.adapter = playersAdapter
 
         binding.addPlayerBtn.setOnClickListener { addInfo() }
@@ -60,41 +54,47 @@ class PlayersFragment : Fragment() {
 
     private fun addInfo() {
         val inflater = LayoutInflater.from(requireContext())
-        val v = inflater.inflate(R.layout.alert_dialog, null) // Используем тот же layout
+        val v = inflater.inflate(R.layout.alert_dialog, null)
 
         val playerName = v.findViewById<EditText>(R.id.player_name_edT_alertDialog)
         val addBtn = v.findViewById<TextView>(R.id.add_new_player_btn_alerDialog)
 
-        // Создаем BottomSheetDialog
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(v)
 
         addBtn.setOnClickListener {
             val names = playerName.text.toString()
+
             if (names.isNotBlank()) {
                 playerList.add(PlayerData(names))
                 playersAdapter.notifyDataSetChanged()
-                bottomSheetDialog.dismiss() // Закрываем диалог
+                savePlayers() // Сохраняем игроков в SharedPreferences
+                bottomSheetDialog.dismiss()
             } else {
-                // Обработайте ситуацию, когда имя пустое
                 Toast.makeText(requireContext(), "Введите имя игрока", Toast.LENGTH_SHORT).show()
             }
         }
 
-        bottomSheetDialog.show() // Показываем BottomSheetDialog
+        bottomSheetDialog.show()
     }
 
+    private fun savePlayers() {
+        val editor = sharedPrefs.edit()
+        val gson = Gson()
+        val json = gson.toJson(playerList) // Преобразуем список в JSON
+        editor.putString("players", json)
+        editor.apply()
+    }
 
-//    override fun onPlayerAdded(playerName: String) {
-//        Log.e("PlayersFragment", "Player added: $playerName")
-//        playerList.add(PlayerData(playerName))
-//        playersAdapter.notifyItemInserted(playerList.size - 1)
-//    }
+    private fun loadPlayers(): ArrayList<PlayerData> {
+        val json = sharedPrefs.getString("players", null) ?: return arrayListOf()
+        val gson = Gson()
+        val type = object : TypeToken<ArrayList<PlayerData>>() {}.type
+        return gson.fromJson(json, type) // Преобразуем JSON обратно в список
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
