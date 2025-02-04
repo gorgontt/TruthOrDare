@@ -1,6 +1,7 @@
 package com.example.truthordare
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.truthordare.adapter.PlayersAdapter
 import com.example.truthordare.databinding.FragmentPlayersBinding
 import com.example.truthordare.model.PlayerData
+import com.example.truthordare.viewpager.ViewPagerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -37,6 +39,11 @@ class PlayersFragment : Fragment() {
 
         binding.backBtn.setOnClickListener {
             findNavController().navigate(R.id.action_playersFragment_to_versionsFragment)
+        }
+
+        binding.startBtn.setOnClickListener {
+            val intent = Intent(activity, ViewPagerActivity::class.java)
+            startActivity(intent)
         }
 
         sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
