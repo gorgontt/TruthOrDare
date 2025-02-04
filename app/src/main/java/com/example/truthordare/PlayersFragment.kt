@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken
 
 
 class PlayersFragment : Fragment() {
+
     private var _binding: FragmentPlayersBinding? = null
     private val binding get() = _binding!!
     private lateinit var playerList: ArrayList<PlayerData>
@@ -39,30 +40,16 @@ class PlayersFragment : Fragment() {
         }
 
         sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
+
         playerList = loadPlayers() // Загружаем игроков из SharedPreferences
 
-        playersAdapter = PlayersAdapter(requireContext(), playerList) { position ->
-            // Удаляем игрока и сохраняем изменения
-            deletePlayer(position)
-        }
-
+        playersAdapter = PlayersAdapter(requireContext(), playerList)
         binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPlayers.adapter = playersAdapter
 
         binding.addPlayerBtn.setOnClickListener { addInfo() }
 
         return root
-    }
-
-    private fun deletePlayer(position: Int) {
-        if (position >= 0 && position < playerList.size) {
-            playerList.removeAt(position)
-            playersAdapter.notifyItemRemoved(position)
-            playersAdapter.notifyItemRangeChanged(position, playerList.size)
-            savePlayers() // Сохраняем измененный список игроков
-        } else {
-            Toast.makeText(requireContext(), "Ошибка: Индекс выходит за границы списка", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun addInfo() {
