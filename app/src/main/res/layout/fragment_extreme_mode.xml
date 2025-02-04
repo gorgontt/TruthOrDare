@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewpager.ExtremeModeFragment"
-    android:background="@color/pink">
+    android:background="@color/gray"
+    android:orientation="vertical"
+    android:gravity="center">
 
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/extreme_mode_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extreme"
+        android:textColor="@color/pink"
+        android:textSize="64dp"
+        android:fontFamily="@font/jura"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Играть"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:background="@drawable/pink_button"/>
+
+
+
+</LinearLayout>

@@ -13,7 +13,7 @@ import me.relex.circleindicator.CircleIndicator3
 
 class ViewPagerActivity : AppCompatActivity() {
 
-    lateinit var viewPager: ViewPager2
+    //lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
