@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.truthordare.R
 import com.example.truthordare.adapter.ViewPagerAdapter
+import me.relex.circleindicator.CircleIndicator3
 
 class ViewPagerActivity : AppCompatActivity() {
 
@@ -35,6 +36,9 @@ class ViewPagerActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(fragments, this)
         viewPager.adapter = adapter
+
+        val indicator: CircleIndicator3 = findViewById(R.id.indicator)
+        indicator.setViewPager(viewPager)
     }
 
 //    override fun onBackPressed() {
