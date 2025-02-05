@@ -36,6 +36,7 @@
         android:textSize="40dp"
         android:fontFamily="@font/jura_semibold"
         android:gravity="center"
+        android:clickable="true"
         android:layout_marginRight="24dp"
         android:layout_marginLeft="24dp"
         android:background="@drawable/orange_button"
