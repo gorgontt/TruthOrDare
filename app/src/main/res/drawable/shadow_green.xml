@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <declare-styleable android:name="ShadowContainer">
+        <attr android:name="containerShadowColor" android:format="color"/>
+        <attr android:name="containerShadowRadius" android:format="dimension"/>
+        <attr android:name="containerDeltaLength" android:format="dimension"/>
+        <attr android:name="containerCornerRadius" android:format="dimension"/>
+        <attr android:name="deltaX" android:format="dimension"/>
+        <attr android:name="deltaY" android:format="dimension"/>
+    </declare-styleable>
+</selector>

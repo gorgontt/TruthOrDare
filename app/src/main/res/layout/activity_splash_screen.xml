@@ -28,7 +28,11 @@
             android:gravity="center"
             android:text="Правда"
             android:textColor="@color/green"
-            android:textSize="64dp" />
+            android:textSize="64dp"
+            android:shadowColor="@color/green"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="50"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -66,7 +70,11 @@
             android:gravity="center"
             android:text="Действие"
             android:textColor="@color/violet"
-            android:textSize="64dp" />
+            android:textSize="64dp"
+            android:shadowColor="@color/violet"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="50"/>
 
     </LinearLayout>
 

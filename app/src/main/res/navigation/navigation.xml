@@ -35,4 +35,18 @@
             android:id="@+id/action_addPlayerFragment_to_playersFragment"
             app:destination="@id/playersFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/softModeFragment"
+        android:name="com.example.truthordare.viewpager.SoftModeFragment"
+        android:label="fragment_soft_mode"
+        tools:layout="@layout/fragment_soft_mode" >
+        <action
+            android:id="@+id/action_softModeFragment_to_choosePlayerNameFragment"
+            app:destination="@id/choosePlayerNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choosePlayerNameFragment"
+        android:name="com.example.truthordare.game.ChoosePlayerNameFragment"
+        android:label="fragment_choose_player_name"
+        tools:layout="@layout/fragment_choose_player_name" />
 </navigation>

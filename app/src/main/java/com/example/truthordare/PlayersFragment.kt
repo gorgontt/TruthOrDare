@@ -3,6 +3,7 @@ package com.example.truthordare
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -55,6 +56,8 @@ class PlayersFragment : Fragment() {
         binding.rvPlayers.adapter = playersAdapter
 
         binding.addPlayerBtn.setOnClickListener { addInfo() }
+
+
 
         return root
     }

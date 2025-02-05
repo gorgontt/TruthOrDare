@@ -55,6 +55,10 @@ dependencies {
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("me.relex:circleindicator:2.1.6")
 
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("tk.zielony:carbon:0.16.0.1")
+    //implementation(libs.androidx.compose.testing)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

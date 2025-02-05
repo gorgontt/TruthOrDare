@@ -50,14 +50,17 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:listitem="@layout/players_item_list"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <carbon.widget.ConstraintLayout
             android:id="@+id/add_player_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/green_button"
             app:layout_constraintBottom_toTopOf="@+id/start_btn"
-            app:layout_constraintEnd_toEndOf="@+id/start_btn" >
+            app:layout_constraintEnd_toEndOf="@+id/start_btn"
+            app:carbon_cornerRadius="2dp"
+            app:carbon_elevation="8dp"
+            app:carbon_elevationShadowColor="@color/green">
 
             <ImageView
                 android:layout_width="35dp"
@@ -73,28 +76,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </carbon.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/start_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/violet_button"
-            android:fontFamily="@font/jura_semibold"
-            android:gravity="center"
-            android:text="Начать"
-            android:textColor="@color/black"
-            android:textSize="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+
+            <carbon.widget.TextView
+                android:id="@+id/start_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/violet_button"
+                android:fontFamily="@font/jura_semibold"
+                android:gravity="center"
+                android:text="Начать"
+                android:textColor="@color/black"
+                android:textSize="40dp"
+                app:carbon_cornerRadius="2dp"
+                app:carbon_elevation="8dp"
+                app:carbon_elevationShadowColor="@color/violet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 

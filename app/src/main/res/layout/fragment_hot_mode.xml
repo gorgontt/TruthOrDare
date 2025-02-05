@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".viewpager.HotModeFragment"
     android:background="@color/gray"
     android:orientation="vertical"
@@ -20,17 +21,26 @@
         android:textColor="@color/orange"
         android:textSize="64dp"
         android:fontFamily="@font/jura"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="50dp"
+        android:shadowColor="@color/orange"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="50"/>
 
-    <TextView
+    <carbon.widget.TextView
+        android:id="@+id/hot_mode_playBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Играть"
         android:textColor="@color/black"
         android:textSize="40dp"
+        android:fontFamily="@font/jura_semibold"
         android:gravity="center"
         android:layout_marginRight="24dp"
         android:layout_marginLeft="24dp"
-        android:background="@drawable/orange_button"/>
+        android:background="@drawable/orange_button"
+        app:carbon_cornerRadius="2dp"
+        app:carbon_elevation="8dp"
+        app:carbon_elevationShadowColor="@color/orange"/>
 
 </LinearLayout>
