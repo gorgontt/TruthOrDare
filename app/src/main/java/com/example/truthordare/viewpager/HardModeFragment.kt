@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.truthordare.databinding.FragmentHardModeBinding
 import com.example.truthordare.game.ChoosePlayerActivity
 import com.example.truthordare.interfaces.PlayerNameListener
+import com.example.truthordare.model.GameMode
 import com.example.truthordare.model.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -34,8 +35,10 @@ class HardModeFragment : Fragment(), PlayerNameListener {
 
         binding.hardModePlayBtn.setOnClickListener {
             val playerList = retrievePlayers()
-            val intent = Intent(activity, ChoosePlayerActivity::class.java)
-            intent.putStringArrayListExtra("playerNames", playerList)
+            val intent = Intent(activity, ChoosePlayerActivity::class.java).apply {
+                putStringArrayListExtra("playerNames", playerList)
+                putExtra("gameMode", GameMode.HARD.name) // Передаем режим
+            }
             startActivity(intent)
         }
 

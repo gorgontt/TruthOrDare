@@ -11,10 +11,12 @@ import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.truthordare.R
+import com.example.truthordare.model.GameMode
 
 class ChoosePlayerActivity : AppCompatActivity() {
 
     private lateinit var videoView: VideoView
+    private lateinit var questionList: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,10 @@ class ChoosePlayerActivity : AppCompatActivity() {
         val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.cat_video)
         videoView.setVideoURI(videoUri)
         videoView.start()
+
+        val gameModeString = intent.getStringExtra("gameMode")
+        val gameMode = gameModeString?.let { GameMode.valueOf(it) }
+        questionList = gameMode?.questionList ?: emptyList()  // Получаем соответствующий список вопросов
 
         Handler(Looper.getMainLooper()).postDelayed({
             videoView.visibility = View.GONE
@@ -39,12 +45,16 @@ class ChoosePlayerActivity : AppCompatActivity() {
         if (playerNames.isNotEmpty()) {
             val randomPlayer = playerNames.random()
 
-            val name: TextView = findViewById(R.id.random_name)
-            name.text = randomPlayer
+            if (questionList.isNotEmpty()) {
+                val randomQuestion = questionList.random()
 
-            // Здесь вы можете продолжить с выбранным игроком (например, начать игру)
+                val name: TextView = findViewById(R.id.random_name)
+                name.text = "$randomPlayer, $randomQuestion"
+            }
+            // Здесь вы можете продолжить с выбранным игроком
         } else {
             Toast.makeText(this, "Не найдено игроков", Toast.LENGTH_SHORT).show()
         }
+
     }
 }

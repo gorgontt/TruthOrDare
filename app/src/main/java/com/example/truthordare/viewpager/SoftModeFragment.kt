@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.truthordare.databinding.FragmentSoftModeBinding
 import com.example.truthordare.game.ChoosePlayerActivity
 import com.example.truthordare.interfaces.PlayerNameListener
+import com.example.truthordare.model.GameMode
 import com.example.truthordare.model.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -29,8 +30,10 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
 
         binding.softModePlayBtn.setOnClickListener {
             val playerList = retrievePlayers()
-            val intent = Intent(activity, ChoosePlayerActivity::class.java)
-            intent.putStringArrayListExtra("playerNames", playerList)
+            val intent = Intent(activity, ChoosePlayerActivity::class.java).apply {
+                putStringArrayListExtra("playerNames", playerList)
+                putExtra("gameMode", GameMode.SOFT.name) // Передаем режим
+            }
             startActivity(intent)
         }
 
@@ -57,4 +60,5 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
     override fun onPlayerDataPass(playerNames: ArrayList<String>) {
         // Сохранение или дальнейшая обработка имен игроков, если необходимо
     }
+
 }
