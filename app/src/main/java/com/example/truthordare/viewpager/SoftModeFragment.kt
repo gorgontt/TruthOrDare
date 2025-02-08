@@ -28,7 +28,7 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
         val root: View = binding.root
 
         binding.softModePlayBtn.setOnClickListener {
-            val playerList = retrievePlayers() // Здесь вы можете получить список игроков
+            val playerList = retrievePlayers()
             val intent = Intent(activity, ChoosePlayerActivity::class.java)
             intent.putStringArrayListExtra("playerNames", playerList)
             startActivity(intent)
@@ -38,14 +38,13 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
     }
 
     private fun retrievePlayers(): ArrayList<String> {
-        // Здесь выполняется получение списка игроков из SharedPreferences или другого источника
         val sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
         val json = sharedPrefs.getString("players", null)
         val gson = Gson()
         val type = object : TypeToken<ArrayList<PlayerData>>() {}.type
         val players: List<PlayerData> = gson.fromJson(json, type) ?: return arrayListOf()
 
-        // Явно указываем тип для map
+
         return ArrayList(players.map { it.playerName })
     }
 

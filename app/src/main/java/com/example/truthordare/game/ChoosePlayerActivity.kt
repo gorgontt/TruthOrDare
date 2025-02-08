@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
@@ -37,7 +38,10 @@ class ChoosePlayerActivity : AppCompatActivity() {
         val playerNames = intent.getStringArrayListExtra("playerNames") ?: return
         if (playerNames.isNotEmpty()) {
             val randomPlayer = playerNames.random()
-            Toast.makeText(this, "Случайный игрок: $randomPlayer", Toast.LENGTH_LONG).show()
+
+            val name: TextView = findViewById(R.id.random_name)
+            name.text = randomPlayer
+
             // Здесь вы можете продолжить с выбранным игроком (например, начать игру)
         } else {
             Toast.makeText(this, "Не найдено игроков", Toast.LENGTH_SHORT).show()
