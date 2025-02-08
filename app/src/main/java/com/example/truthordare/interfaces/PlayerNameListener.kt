@@ -2,5 +2,5 @@ package com.example.truthordare.interfaces
 
 interface PlayerNameListener {
 
-    fun onPlayerNameAdded(name: String)
+    fun onPlayerDataPass(playerNames: ArrayList<String>)
 }

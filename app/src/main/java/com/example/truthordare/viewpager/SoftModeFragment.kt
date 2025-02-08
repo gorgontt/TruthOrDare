@@ -1,5 +1,6 @@
 package com.example.truthordare.viewpager
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,16 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.truthordare.databinding.FragmentSoftModeBinding
 import com.example.truthordare.game.ChoosePlayerActivity
+import com.example.truthordare.interfaces.PlayerNameListener
+import com.example.truthordare.model.PlayerData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
-class SoftModeFragment : Fragment() {
+class SoftModeFragment : Fragment(), PlayerNameListener {
 
     private var _binding: FragmentSoftModeBinding? = null
     private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,15 +28,34 @@ class SoftModeFragment : Fragment() {
         val root: View = binding.root
 
         binding.softModePlayBtn.setOnClickListener {
-
+            val playerList = retrievePlayers() // Здесь вы можете получить список игроков
             val intent = Intent(activity, ChoosePlayerActivity::class.java)
+            intent.putStringArrayListExtra("playerNames", playerList)
             startActivity(intent)
-
         }
 
         return root
-
-
     }
 
+    private fun retrievePlayers(): ArrayList<String> {
+        // Здесь выполняется получение списка игроков из SharedPreferences или другого источника
+        val sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
+        val json = sharedPrefs.getString("players", null)
+        val gson = Gson()
+        val type = object : TypeToken<ArrayList<PlayerData>>() {}.type
+        val players: List<PlayerData> = gson.fromJson(json, type) ?: return arrayListOf()
+
+        // Явно указываем тип для map
+        return ArrayList(players.map { it.playerName })
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onPlayerDataPass(playerNames: ArrayList<String>) {
+        // Сохранение или дальнейшая обработка имен игроков, если необходимо
+    }
 }

@@ -3,7 +3,6 @@ package com.example.truthordare
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.truthordare.adapter.PlayersAdapter
 import com.example.truthordare.databinding.FragmentPlayersBinding
+import com.example.truthordare.game.ChoosePlayerActivity
 import com.example.truthordare.model.PlayerData
 import com.example.truthordare.viewpager.ViewPagerActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -46,6 +46,12 @@ class PlayersFragment : Fragment() {
             val intent = Intent(activity, ViewPagerActivity::class.java)
             startActivity(intent)
         }
+
+//        binding.startBtn.setOnClickListener {
+//            val intent = Intent(activity, ChoosePlayerActivity::class.java)
+//            intent.putStringArrayListExtra("playerNames", playerList.map { it.playerName } as ArrayList<String>) // Передаем имена
+//            startActivity(intent)
+//        }
 
         sharedPrefs = requireContext().getSharedPreferences("PlayerName", Context.MODE_PRIVATE)
 
