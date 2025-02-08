@@ -1,14 +1,19 @@
 package com.example.truthordare.game
 
+import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.truthordare.MainActivity
 import com.example.truthordare.R
 
 class ChoosePlayerActivity : AppCompatActivity() {
@@ -32,6 +37,9 @@ class ChoosePlayerActivity : AppCompatActivity() {
         videoView.setVideoURI(videoUri)
 
         videoView.start()
+        Handler(Looper.getMainLooper()).postDelayed({
+            videoView.visibility = View.GONE
+        }, 2000)
 
 
     }
