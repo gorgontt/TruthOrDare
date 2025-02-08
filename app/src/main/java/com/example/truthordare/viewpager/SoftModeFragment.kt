@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.truthordare.databinding.FragmentSoftModeBinding
 import com.example.truthordare.game.ChoosePlayerActivity
+import com.example.truthordare.game.QuestonsFragment
 import com.example.truthordare.interfaces.PlayerNameListener
 import com.example.truthordare.model.GameMode
 import com.example.truthordare.model.PlayerData
@@ -34,6 +35,11 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
                 putStringArrayListExtra("playerNames", playerList)
                 putExtra("gameMode", GameMode.SOFT.name) // Передаем режим
             }
+
+//            val intent1 = Intent(activity, QuestonsFragment()).apply {
+//                putStringArrayListExtra("playerNames", playerList)
+//                putExtra("gameMode", GameMode.SOFT.name) // Передаем режим
+//            }
             startActivity(intent)
         }
 
