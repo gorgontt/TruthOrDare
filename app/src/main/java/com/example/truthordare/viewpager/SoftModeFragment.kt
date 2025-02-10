@@ -32,7 +32,7 @@ class SoftModeFragment : Fragment(), PlayerNameListener {
             val playerList = retrievePlayers()
             val intent = Intent(activity, ChoosePlayerActivity::class.java).apply {
                 putStringArrayListExtra("playerNames", playerList)
-                putExtra("gameMode", GameMode.SOFT.name) // Передаем режим
+                //putExtra("gameMode", GameMode.SOFT.name) // Передаем режим
             }
             startActivity(intent)
         }

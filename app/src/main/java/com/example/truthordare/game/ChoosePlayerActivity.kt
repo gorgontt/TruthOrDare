@@ -16,7 +16,9 @@ import com.example.truthordare.model.GameMode
 class ChoosePlayerActivity : AppCompatActivity() {
 
     private lateinit var videoView: VideoView
-    private lateinit var questionList: List<String>
+    private lateinit var truthBtn: TextView
+    private lateinit var dareBtn: TextView
+    //private lateinit var questionList: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +26,28 @@ class ChoosePlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_choose_player)
 
         videoView = findViewById(R.id.gif)
+        truthBtn = findViewById(R.id.truth_btn)
+        truthBtn = findViewById(R.id.dare_btn)
+
+        truthBtn.setOnClickListener {
+            val truthOrDareFragment = TruthOrDareFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_choose_frame, truthOrDareFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        dareBtn.setOnClickListener {
+
+        }
 
         val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.cat_video)
         videoView.setVideoURI(videoUri)
         videoView.start()
 
-        val gameModeString = intent.getStringExtra("gameMode")
-        val gameMode = gameModeString?.let { GameMode.valueOf(it) }
-        questionList = gameMode?.questionList ?: emptyList()  // Получаем соответствующий список вопросов
+//        val gameModeString = intent.getStringExtra("gameMode")
+//        val gameMode = gameModeString?.let { GameMode.valueOf(it) }
+//        questionList = gameMode?.questionList ?: emptyList()  // Получаем соответствующий список вопросов
 
         Handler(Looper.getMainLooper()).postDelayed({
             videoView.visibility = View.GONE
@@ -43,18 +59,31 @@ class ChoosePlayerActivity : AppCompatActivity() {
     private fun chooseRandomPlayer() {
         val playerNames = intent.getStringArrayListExtra("playerNames") ?: return
         if (playerNames.isNotEmpty()) {
+
             val randomPlayer = playerNames.random()
+            val name: TextView = findViewById(R.id.player_name_choose_activity)
+            name.text = randomPlayer
 
-            if (questionList.isNotEmpty()) {
-                val randomQuestion = questionList.random()
-
-                val name: TextView = findViewById(R.id.random_name)
-                name.text = "$randomPlayer, $randomQuestion"
-            }
-            // Здесь вы можете продолжить с выбранным игроком
         } else {
             Toast.makeText(this, "Не найдено игроков", Toast.LENGTH_SHORT).show()
         }
-
     }
+
+//    private fun chooseRandomPlayer() {
+//        val playerNames = intent.getStringArrayListExtra("playerNames") ?: return
+//        if (playerNames.isNotEmpty()) {
+//            val randomPlayer = playerNames.random()
+//
+//            if (questionList.isNotEmpty()) {
+//                val randomQuestion = questionList.random()
+//
+//                val name: TextView = findViewById(R.id.random_name)
+//                name.text = "$randomPlayer, $randomQuestion"
+//            }
+//            // Здесь вы можете продолжить с выбранным игроком
+//        } else {
+//            Toast.makeText(this, "Не найдено игроков", Toast.LENGTH_SHORT).show()
+//        }
+//
+//    }
 }
